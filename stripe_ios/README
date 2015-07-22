@@ -1,0 +1,90 @@
+
+
+
+MODULE NAMING
+-------------
+
+com.ravindra.stripe
+
+GET STARTED
+
+DOCUMENTATION FOR YOUR MODULE
+-----------------------------
+
+This is a wrapper around the Stripe iOS SDK It is used to send payment card details to the Stripe  and 
+return a Single Use Token for use in your server-side.
+
+You can create your own user interface and use this module for getting token from Stripe.
+
+Read more about using Stripe for payment from the following link
+
+[iOS Integration](https://stripe.com/docs/mobile/ios)
+
+
+
+
+INSTALLING  MODULE
+-------------------
+
+Mac OS X
+--------
+Copy the distribution zip file into the `~/Library/Application Support/Titanium` folder
+
+Linux
+-----
+Copy the distribution zip file into the `~/.titanium` folder
+
+Windows
+-------
+Copy the distribution zip file into the `C:\ProgramData\Titanium` folder
+
+
+REGISTER YOUR MODULE
+--------------------
+
+Register your module with your application by editing `tiapp.xml` and adding your module.
+Example:
+
+<modules>
+	<module version="1.0">com.ravindra.stripe</module>
+</modules>
+
+
+USING YOUR MODULE IN CODE
+-------------------------
+
+To use your module in code, you will need to require it.
+
+For example,
+
+//require the module
+var stripe = require('com.ravindra.stripe');
+
+//set card information using setCard method
+var value = stripe.setCard({
+	publishableKey : "pk_test_6pRNASCoBOKtIshFeQd4XMUh",
+	cardNumber:"4242424242424242",
+	month : 12,
+	expiryYear : 2016,
+	cvc : "123"
+});
+
+
+//request for token from stripe 
+stripe.requestForToken({
+	success : success,
+	failure : failure
+});
+
+//On successful receive of token
+function success(e) {
+	alert("Toke received from Stripe: " + e.token);
+}
+
+//On failure 
+function failure(e) {
+	alert("Error: " + e.error);
+}
+
+
+Cheers!
