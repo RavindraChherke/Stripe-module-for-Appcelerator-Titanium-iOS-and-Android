@@ -1,0 +1,18 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name StripeAndroidBindings
+%{
+
+#include <string.h>
+#include <v8.h>
+#include <KrollBindings.h>
+
+#include "com.ravindra.stripe.StripeAndroidModule.h"
+#include "com.ravindra.stripe.ExampleProxy.h"
+
+
+%}
+struct titanium::bindings::BindEntry;
+%%
+com.ravindra.stripe.StripeAndroidModule, ::com::ravindra::stripe::StripeAndroidModule::bindProxy, ::com::ravindra::stripe::StripeAndroidModule::dispose
+com.ravindra.stripe.ExampleProxy, ::com::ravindra::stripe::stripeandroid::ExampleProxy::bindProxy, ::com::ravindra::stripe::stripeandroid::ExampleProxy::dispose
+%%

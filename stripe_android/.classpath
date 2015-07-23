@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="android/src"/>
+	<classpathentry kind="src" path="android/build/.apt_generated"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/android-sdk-macosx/platforms/android-14/android.jar"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/android-sdk-macosx/add-ons/addon-google_apis-google-14/libs/maps.jar"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/Library/Application Support/Titanium/mobilesdk/osx/4.0.0.GA/android/titanium.jar"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/Library/Application Support/Titanium/mobilesdk/osx/4.0.0.GA/android/kroll-common.jar"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/Library/Application Support/Titanium/mobilesdk/osx/4.0.0.GA/android/kroll-apt.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/Ravindra/Documents/Appcelerator_Studio_Workspace/stripe_android/example/gson-2.2.4.jar"/>
+	<classpathentry kind="lib" path="/Users/Ravindra/Documents/Appcelerator_Studio_Workspace/stripe_android/example/stripe-java-1.15.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

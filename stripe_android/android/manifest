@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0
+apiversion: 2
+architectures: armeabi armeabi-v7a x86
+description: Stripe payment library for Android
+author: Ravindra Chherke
+license: To Ravindra chherke
+copyright: 2015
+
+# these should not be edited
+name: stripe_android
+moduleid: com.ravindra.stripe
+guid: 89b4eaf4-d57f-4956-b6a3-deb3a635ac2c
+platform: android
+minsdk: 4.0.0.GA
