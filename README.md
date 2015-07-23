@@ -1,4 +1,4 @@
-# Stripe-iOS-module-for-Appcelerator-Titanium
+# Stripe-module-for-Appcelerator-Titanium iOS and Android
 
-Titanium ios for Stripe payment module 
+Stripe payment module for Titanium iOS and Android
 
