@@ -1,21 +1,21 @@
-# stripe_ios Module
+# stripe_Android Module
 
 ## Description
 
-This is a wrapper around the Stripe iOS SDK It is used to send payment card details to the Stripe  and 
+This is a wrapper around the Stripe Android SDK It is used to send payment card details to the Stripe  and 
 return a Single Use Token for use in your server-side.
 
 You can create your own user interface and use this module for getting token from Stripe.
 
 
 
-## Accessing the stripe_ios Module
+## Accessing the stripe_Android Module
 
 To access this module from JavaScript, you would do the following:
 
-    var stripe_ios = require("com.ravindra.stripe");
+    var stripe_Android = require("com.ravindra.stripe");
 
-The stripe_ios variable is a reference to the Module object.
+The stripe_Android variable is a reference to the Module object.
 
 ## Reference
 
@@ -24,7 +24,7 @@ Read more about using Stripe for payment from the following link
 [Stripe Android Integration](https://stripe.com/docs/mobile/android)
 
 
-## stripe_ios.function
+## stripe_Android.function
 
 ###setCard
 set card information using setCard method

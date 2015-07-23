@@ -11,7 +11,7 @@ GET STARTED
 DOCUMENTATION FOR YOUR MODULE
 -----------------------------
 
-This is a wrapper around the Stripe iOS SDK It is used to send payment card details to the Stripe  and 
+This is a wrapper around the Stripe Android SDK It is used to send payment card details to the Stripe  and 
 return a Single Use Token for use in your server-side.
 
 You can create your own user interface and use this module for getting token from Stripe.
