@@ -1,0 +1,7 @@
+.DS_Store
+tmp
+build/*
+libs/
+stripe_android/android/build/
+stripe_android/android/build/*
+stripe_android/android/java-sources.txt
