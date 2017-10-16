@@ -2,12 +2,16 @@
 
 Stripe payment module for Titanium iOS and Android
 
+Check [releases](https://github.com/RavindraChherke/Stripe-module-for-Appcelerator-Titanium-iOS-and-Android/releases)
 
+#Example
 
+```javascript
 //require the module
 var stripe = require('com.ravindra.stripe');
 
 //set card information using setCard method
+
 var value = stripe.setCard({
 	publishableKey : "pk_test_6pRNASCoBOKtIshFeQd4XMUh",
 	cardNumber:"4242424242424242",
@@ -32,5 +36,5 @@ function success(e) {
 function failure(e) {
 	alert("Error: " + e.error);
 }
-
+```
 
