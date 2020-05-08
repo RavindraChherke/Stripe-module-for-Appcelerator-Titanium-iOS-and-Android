@@ -1,67 +1,74 @@
-# stripe_ios Module
-
-## Description
-
-This is a wrapper around the Stripe iOS SDK It is used to send payment card details to the Stripe  and 
-return a Single Use Token for use in your server-side.
-
-You can create your own user interface and use this module for getting token from Stripe.
 
 
-
-## Accessing the stripe_ios Module
-
-To access this module from JavaScript, you would do the following:
-
-    var stripe_ios = require("com.ravindra.stripe");
-
-The stripe_ios variable is a reference to the Module object.
-
-## Reference
-
-Read more about using Stripe for payment from the following link
-
-[iOS Integration](https://stripe.com/docs/mobile/ios)
+## Stripe payment module for Titanium iOS
 
 
-## stripe_ios.function
+## Adding Card
 
-###setCard
-set card information using setCard method
+``` 
+var paymentId = null;
+var clientSecret = null;
 
-###requestForToken
-request for token from stripe 
+var tiStripe = require('com.ravindra.stripe');
 
-## Usage
+tiStripe.initialize({
+    publishableKey:"XXXXXXX",
+    stripeAccount:"XXXXXXXX" //(Optional)
+})
 
-var stripe = require('com.ravindra.stripe');
-
-
-var value = stripe.setCard({
-	publishableKey : "<YOUR PUBLISHABLE KEY>",
-	cardNumber:"4242424242424242",
-	month : 12,
-	expiryYear : 2016,
-	cvc : "123"
+tiStripe.createPaymentMethod({
+    cardNumber: "XXXXXXXX",
+    month: 2,
+    expiryYear: 2020,
+    cvc: "123",
+    paymentMethodCallback: function (e) {
+        if (e.error) {
+            Ti.API.info('paymentMethodCallback:  Error: ' + e.error);
+        } else {
+            Ti.API.info('paymentMethodCallback:  paymentMethodId :' + e.paymentMethodId);
+            paymentId = e.paymentMethodId;
+            //Use Setup Intent API on server https://stripe.com/docs/payments/setup-intents. It will give you client secret
+        }
+    }
 });
 
 
- 
-stripe.requestForToken({
-	success : success,
-	failure : failure
+tiStripe.confirmSetupIntent({
+    paymentId: paymentId,
+    clientSecret: clientSecret,
+    confirmSetupIntentCallback: function (e) {
+        Ti.API.info('Ti ti_stripe.confirmSetupIntent:  Error: ' + e.error + ' status ' + e.status + ' success: ' + e.success + '  requires_confirmation: ' + e.requires_confirmation);
+        if (e.error) {
+            //Handle error (Show alert etc.)
+        } else {
+            // Send paymentId to server 
+        }
+    }
+});
+```
+##  Checkout process
+
+###  Create Payment Intent
+
+Send checkout data to server to Create Payment Intent https://stripe.com/docs/payments/payment-intents. It will give you client secret and optional stripe account. 
+
+###  Confirm Payment Intent
+```
+ti_stripe.handleNextActionForPaymentIntentWithAuthentication({
+    clientSecret: "XXXXXXXX",
+    stripeAccount: "XXXXXXXX", //(Optional)
+    handleNextActionForPaymentIntentCallback: function (e) {
+        if (e.pid) {
+            // Send request on server to confirm the Payment Intent           
+        } else {
+            Ti.API.info(e.error);
+        }
+    }
 });
 
 
-function success(e) {
-	alert("Toke received from Stripe: " + e.token);
-}
 
- 
-function failure(e) {
-	alert("Error: " + e.error);
-}
-
+```
 
 ## License
 

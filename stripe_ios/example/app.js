@@ -1,35 +1,39 @@
-var win1 = Titanium.UI.createWindow({
-	title : 'Tab 1',
-	backgroundColor : '#fff'
+// This is a test harness for your module
+// You should do something interesting in this harness
+// to test out the module and to provide instructions
+// to users on how to use it by example.
+
+
+// open a single window
+var win = Ti.UI.createWindow({
+	backgroundColor:'white'
 });
+var label = Ti.UI.createLabel();
+win.add(label);
+win.open();
 
-//require the module
-var stripe = require('com.ravindra.stripe');
+// TODO: write your module tests here
+var stripe_ios = require('com.ravindra.stripe');
+Ti.API.info("module is => " + stripe_ios);
 
-//set card information using setCard method
-var value = stripe.setCard({
-	publishableKey : "pk_test_6pRNASCoBOKtIshFeQd4XMUh",
-	cardNumber:"4242424242424242",
-	month : 12,
-	expiryYear : 2016,
-	cvc : "123"
-});
+label.text = stripe_ios.example();
 
+Ti.API.info("module exampleProp is => " + stripe_ios.exampleProp);
+stripe_ios.exampleProp = "This is a test value";
 
-//request for token from stripe 
-stripe.requestForToken({
-	success : success,
-	failure : failure
-});
+if (Ti.Platform.name == "android") {
+	var proxy = stripe_ios.createExample({
+		message: "Creating an example Proxy",
+		backgroundColor: "red",
+		width: 100,
+		height: 100,
+		top: 100,
+		left: 150
+	});
 
-//On successful receive of token
-function success(e) {
-	alert("Toke received from Stripe: " + e.token);
+	proxy.printMessage("Hello world!");
+	proxy.message = "Hi world!.  It's me again.";
+	proxy.printMessage("Hello world!");
+	win.add(proxy);
 }
 
-//On failure 
-function failure(e) {
-	alert("Error: " + e.error);
-}
-
-win1.open();
