@@ -1,7 +1,7 @@
 
 ##  Stripe module for Appcelerator Titanium 
 
-## There are breaking changes in version 2.0
+## There are breaking changes in version 3.0
 
 
 ## Adding Card
