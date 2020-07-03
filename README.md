@@ -3,7 +3,7 @@
 ## Version 3
 Check [releases](https://github.com/RavindraChherke/Stripe-module-for-Appcelerator-Titanium-iOS-and-Android/releases)
 
-[iOS Module Documentation for version 2](https://github.com/RavindraChherke/Stripe-module-for-Appcelerator-Titanium-iOS-and-Android/tree/master/stripe_ios/ios)
+[iOS Module Documentation for version 3](https://github.com/RavindraChherke/Stripe-module-for-Appcelerator-Titanium-iOS-and-Android/tree/master/stripe_ios/ios)
 
 [Stripe Documentation](https://github.com/stripe/stripe-ios)
 
