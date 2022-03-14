@@ -1,0 +1,11 @@
+framework module StripeUICore {
+  umbrella header "StripeUICore.h"
+
+  export *
+  module * { export * }
+}
+
+module StripeUICore.Swift {
+    header "StripeUICore-Swift.h"
+    requires objc
+}

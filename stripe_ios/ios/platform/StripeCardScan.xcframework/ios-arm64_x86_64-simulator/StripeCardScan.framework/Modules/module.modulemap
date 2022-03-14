@@ -1,0 +1,11 @@
+framework module StripeCardScan {
+  umbrella header "StripeCardScan.h"
+
+  export *
+  module * { export * }
+}
+
+module StripeCardScan.Swift {
+    header "StripeCardScan-Swift.h"
+    requires objc
+}
