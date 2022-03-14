@@ -1,0 +1,59 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name StripeCardScan
+import AVFoundation
+import AVKit
+import Accelerate
+import CoreGraphics
+import CoreML
+import CoreTelephony
+import Foundation
+@_exported import StripeCardScan
+@_exported import StripeCore
+import Swift
+import UIKit
+import VideoToolbox
+import Vision
+import os.log
+import os
+@frozen public enum CardImageVerificationSheetResult {
+  case completed(scannedCard: StripeCardScan.ScannedCard)
+  case canceled(reason: StripeCardScan.CancellationReason)
+  case failed(error: Swift.Error)
+}
+@available(iOS 11.2, *)
+final public class CardImageVerificationSheet {
+  public init(cardImageVerificationIntentId: Swift.String, cardImageVerificationIntentSecret: Swift.String, apiClient: StripeCore.STPAPIClient = STPAPIClient.shared)
+  final public func present(from presentingViewController: UIKit.UIViewController, completion: @escaping (StripeCardScan.CardImageVerificationSheetResult) -> Swift.Void)
+  @objc deinit
+}
+public enum CancellationReason : Swift.String, Swift.Equatable {
+  case back
+  case closed
+  case userCannotScan
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ScannedCard : Swift.Equatable {
+  public let pan: Swift.String
+  public static func == (a: StripeCardScan.ScannedCard, b: StripeCardScan.ScannedCard) -> Swift.Bool
+}
+public enum CardImageVerificationSheetError : Swift.Error {
+  case invalidClientSecret
+  case unknown(debugDescription: Swift.String)
+}
+extension CardImageVerificationSheetError : Foundation.LocalizedError {
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension CardImageVerificationSheetError : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension StripeCardScan.CancellationReason : Swift.Hashable {}
+extension StripeCardScan.CancellationReason : Swift.RawRepresentable {}

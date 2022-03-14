@@ -1,0 +1,11 @@
+framework module StripeCameraCore {
+  umbrella header "StripeCameraCore.h"
+
+  export *
+  module * { export * }
+}
+
+module StripeCameraCore.Swift {
+    header "StripeCameraCore-Swift.h"
+    requires objc
+}

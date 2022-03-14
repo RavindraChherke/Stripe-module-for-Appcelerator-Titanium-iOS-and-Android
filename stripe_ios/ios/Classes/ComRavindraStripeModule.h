@@ -5,12 +5,10 @@
  * Copyright (c) 2020 Your Company. All rights reserved.
  */
 
-#import "TiModule.h"
-#import <Stripe/Stripe.h>
+@import TitaniumKit;
+@import Stripe;
 
-@interface ComRavindraStripeModule : TiModule<STPAuthenticationContext>{
-
-}
+@interface ComRavindraStripeModule : TiModule <STPAuthenticationContext>
 
 -(void)initialize:(id)args;
 -(void)createPaymentMethod:(id) args;

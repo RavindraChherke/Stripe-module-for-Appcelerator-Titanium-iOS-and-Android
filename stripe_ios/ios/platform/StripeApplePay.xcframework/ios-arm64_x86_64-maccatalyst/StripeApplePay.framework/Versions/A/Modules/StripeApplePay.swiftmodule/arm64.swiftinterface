@@ -1,0 +1,249 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
+// swift-module-flags: -target arm64-apple-ios13.1-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name StripeApplePay
+import Foundation
+import ObjectiveC
+import PassKit
+@_exported import StripeApplePay
+@_exported import StripeCore
+import Swift
+import UIKit
+extension STPAPIClient {
+  public class func pkPaymentError(forStripeError stripeError: Swift.Error?) -> Swift.Error?
+}
+extension StripeAPI {
+  public struct BillingDetails : StripeCore.StripeCodable {
+    @StripeCore.IncludeUnknownFields public var address: StripeCore.StripeAPI.BillingDetails.Address? {
+      get
+      set
+      _modify
+    }
+    public struct Address : StripeCore.StripeCodable {
+      public var line1: Swift.String?
+      public var line2: Swift.String?
+      public var city: Swift.String?
+      public var state: Swift.String?
+      public var postalCode: Swift.String?
+      public var country: Swift.String?
+      public var _additionalParametersStorage: StripeCore.NonEncodableParameters?
+      public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+      public init(from decoder: Swift.Decoder) throws
+      public func encode(to encoder: Swift.Encoder) throws
+    }
+    public var email: Swift.String?
+    public var name: Swift.String?
+    public var phone: Swift.String?
+    public var _additionalParametersStorage: StripeCore.NonEncodableParameters?
+    public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+    public init(from decoder: Swift.Decoder) throws
+    public func encode(to encoder: Swift.Encoder) throws
+  }
+}
+@objc public protocol _stpinternal_STPApplePayContextDelegateBase : ObjectiveC.NSObjectProtocol {
+  @objc(applePayContext:didSelectShippingMethod:handler:) optional func applePayContext(_ context: StripeApplePay.STPApplePayContext, didSelect shippingMethod: PassKit.PKShippingMethod, handler: @escaping (PassKit.PKPaymentRequestShippingMethodUpdate) -> Swift.Void)
+  @objc optional func applePayContext(_ context: StripeApplePay.STPApplePayContext, didSelectShippingContact contact: PassKit.PKContact, handler: @escaping (PassKit.PKPaymentRequestShippingContactUpdate) -> Swift.Void)
+}
+public protocol ApplePayContextDelegate : StripeApplePay._stpinternal_STPApplePayContextDelegateBase {
+  func applePayContext(_ context: StripeApplePay.STPApplePayContext, didCreatePaymentMethod paymentMethod: StripeCore.StripeAPI.PaymentMethod, paymentInformation: PassKit.PKPayment, completion: @escaping StripeApplePay.STPIntentClientSecretCompletionBlock)
+  func applePayContext(_ context: StripeApplePay.STPApplePayContext, didCompleteWith status: StripeApplePay.STPApplePayContext.PaymentStatus, error: Swift.Error?)
+}
+@objc(_stpinternal_APContextSwift) public class STPApplePayContext : ObjectiveC.NSObject, PassKit.PKPaymentAuthorizationControllerDelegate {
+  required public init?(paymentRequest: PassKit.PKPaymentRequest, delegate: StripeApplePay._stpinternal_STPApplePayContextDelegateBase?)
+  required public init?(paymentRequest: PassKit.PKPaymentRequest, delegate: StripeApplePay.ApplePayContextDelegate)
+  @available(iOSApplicationExtension, unavailable, message: "Use `presentApplePay(from:completion:)` in App Extensions.")
+  @available(macCatalystApplicationExtension, unavailable, message: "Use `presentApplePay(from:completion:)` in App Extensions.")
+  public func presentApplePay(completion: StripeApplePay.STPVoidBlock? = nil)
+  public func presentApplePay(from window: UIKit.UIWindow?, completion: StripeApplePay.STPVoidBlock? = nil)
+  @available(*, deprecated, renamed: "presentApplePay(completion:)", message: "Use `presentApplePay(completion:)` instead.")
+  @objc(presentApplePayOnViewController:completion:) public func presentApplePay(on viewController: UIKit.UIViewController, completion: StripeApplePay.STPVoidBlock? = nil)
+  public var apiClient: StripeCore.STPAPIClient
+  @objc override dynamic public func responds(to aSelector: ObjectiveC.Selector!) -> Swift.Bool
+  @objc public func paymentAuthorizationController(_ controller: PassKit.PKPaymentAuthorizationController, didAuthorizePayment payment: PassKit.PKPayment, handler completion: @escaping (PassKit.PKPaymentAuthorizationResult) -> Swift.Void)
+  @objc public func paymentAuthorizationController(_ controller: PassKit.PKPaymentAuthorizationController, didSelectShippingMethod shippingMethod: PassKit.PKShippingMethod, handler completion: @escaping (PassKit.PKPaymentRequestShippingMethodUpdate) -> Swift.Void)
+  @objc public func paymentAuthorizationController(_ controller: PassKit.PKPaymentAuthorizationController, didSelectShippingContact contact: PassKit.PKContact, handler completion: @escaping (PassKit.PKPaymentRequestShippingContactUpdate) -> Swift.Void)
+  @objc public func paymentAuthorizationControllerDidFinish(_ controller: PassKit.PKPaymentAuthorizationController)
+  @objc public func presentationWindow(for controller: PassKit.PKPaymentAuthorizationController) -> UIKit.UIWindow?
+  @frozen public enum PaymentStatus {
+    case success
+    case error
+    case userCancellation
+    public static func == (a: StripeApplePay.STPApplePayContext.PaymentStatus, b: StripeApplePay.STPApplePayContext.PaymentStatus) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  @objc deinit
+  @objc override dynamic public init()
+}
+public typealias STPVoidBlock = () -> Swift.Void
+public typealias STPIntentClientSecretCompletionBlock = (Swift.String?, Swift.Error?) -> Swift.Void
+extension StripeAPI {
+  public struct PaymentMethod : StripeCore.StripeDecodable {
+    public let id: Swift.String
+    public var created: Foundation.Date?
+    public var livemode: Swift.Bool
+    public var type: StripeCore.StripeAPI.PaymentMethod.PaymentMethodType?
+    @frozen public enum PaymentMethodType : Swift.String, StripeCore.StripeEnumCodable {
+      case card
+      case unknown
+      case unparsable
+      public typealias RawValue = Swift.String
+      public var rawValue: Swift.String {
+        get
+      }
+      public init?(rawValue: Swift.String)
+    }
+    @StripeCore.IncludeUnknownFields public var billingDetails: StripeCore.StripeAPI.BillingDetails? {
+      get
+      set
+      _modify
+    }
+    public var customerId: Swift.String?
+    @StripeCore.IncludeUnknownFields public var card: StripeCore.StripeAPI.PaymentMethod.Card? {
+      get
+      set
+      _modify
+    }
+    public struct Card : StripeCore.StripeDecodable {
+      public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+      public var brand: StripeCore.StripeAPI.PaymentMethod.Card.Brand {
+        get
+      }
+      @frozen public enum Brand : Swift.String, StripeCore.StripeEnumCodable {
+        case visa
+        case amex
+        case mastercard
+        case discover
+        case jcb
+        case diners
+        case unionpay
+        case unknown
+        case unparsable
+        public typealias RawValue = Swift.String
+        public init?(rawValue: Swift.String)
+        public var rawValue: Swift.String {
+          get
+        }
+      }
+      public var country: Swift.String? {
+        get
+      }
+      public var expMonth: Swift.Int {
+        get
+      }
+      public var expYear: Swift.Int {
+        get
+      }
+      public var funding: Swift.String? {
+        get
+      }
+      public var last4: Swift.String? {
+        get
+      }
+      public var fingerprint: Swift.String? {
+        get
+      }
+      @StripeCore.IncludeUnknownFields public var networks: StripeCore.StripeAPI.PaymentMethod.Card.Networks? {
+        get
+      }
+      @StripeCore.IncludeUnknownFields public var threeDSecureUsage: StripeCore.StripeAPI.PaymentMethod.Card.ThreeDSecureUsage? {
+        get
+      }
+      public var wallet: StripeCore.StripeAPI.PaymentMethod.Card.Wallet? {
+        get
+      }
+      public struct Networks : StripeCore.StripeDecodable {
+        public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+        public var available: [Swift.String]? {
+          get
+        }
+        public var preferred: Swift.String? {
+          get
+        }
+        public init(from decoder: Swift.Decoder) throws
+      }
+      public struct ThreeDSecureUsage : StripeCore.StripeDecodable {
+        public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+        public var supported: Swift.Bool {
+          get
+        }
+        public init(from decoder: Swift.Decoder) throws
+      }
+      public struct Wallet : StripeCore.StripeDecodable {
+        public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+        public var type: StripeCore.StripeAPI.PaymentMethod.Card.Wallet.WalletType {
+          get
+        }
+        public var masterpass: StripeCore.StripeAPI.PaymentMethod.Card.Wallet.Masterpass? {
+          get
+        }
+        public var visaCheckout: StripeCore.StripeAPI.PaymentMethod.Card.Wallet.VisaCheckout? {
+          get
+        }
+        @frozen public enum WalletType : Swift.String, StripeCore.StripeEnumCodable {
+          case amexExpressCheckout
+          case applePay
+          case googlePay
+          case masterpass
+          case samsungPay
+          case visaCheckout
+          case unknown
+          case unparsable
+          public typealias RawValue = Swift.String
+          public init?(rawValue: Swift.String)
+          public var rawValue: Swift.String {
+            get
+          }
+        }
+        public struct Masterpass : StripeCore.StripeDecodable {
+          public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+          public var email: Swift.String? {
+            get
+          }
+          public var name: Swift.String? {
+            get
+          }
+          public var billingAddress: StripeCore.StripeAPI.BillingDetails.Address? {
+            get
+          }
+          public var shippingAddress: StripeCore.StripeAPI.BillingDetails.Address? {
+            get
+          }
+          public init(from decoder: Swift.Decoder) throws
+        }
+        public struct VisaCheckout : StripeCore.StripeDecodable {
+          public var email: Swift.String? {
+            get
+          }
+          public var name: Swift.String? {
+            get
+          }
+          public var billingAddress: StripeCore.StripeAPI.BillingDetails.Address? {
+            get
+          }
+          public var shippingAddress: StripeCore.StripeAPI.BillingDetails.Address? {
+            get
+          }
+          public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+          public init(from decoder: Swift.Decoder) throws
+        }
+        public init(from decoder: Swift.Decoder) throws
+      }
+      public init(from decoder: Swift.Decoder) throws
+    }
+    public var _allResponseFieldsStorage: StripeCore.NonEncodableParameters?
+    public init(from decoder: Swift.Decoder) throws
+  }
+}
+extension StripeApplePay.STPApplePayContext.PaymentStatus : Swift.Equatable {}
+extension StripeApplePay.STPApplePayContext.PaymentStatus : Swift.Hashable {}
+extension StripeCore.StripeAPI.PaymentMethod.PaymentMethodType : Swift.Equatable {}
+extension StripeCore.StripeAPI.PaymentMethod.PaymentMethodType : Swift.Hashable {}
+extension StripeCore.StripeAPI.PaymentMethod.PaymentMethodType : Swift.RawRepresentable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Brand : Swift.Equatable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Brand : Swift.Hashable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Brand : Swift.RawRepresentable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Wallet.WalletType : Swift.Equatable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Wallet.WalletType : Swift.Hashable {}
+extension StripeCore.StripeAPI.PaymentMethod.Card.Wallet.WalletType : Swift.RawRepresentable {}

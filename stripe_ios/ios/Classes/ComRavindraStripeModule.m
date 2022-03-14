@@ -6,37 +6,21 @@
  */
 
 #import "ComRavindraStripeModule.h"
-#import "TiBase.h"
-#import "TiHost.h"
-#import "TiUtils.h"
-#import <TiApp.h>
+@import TitaniumKit;
 
 @implementation ComRavindraStripeModule
 
 #pragma mark Internal
 
-// This is generated for your module, please do not change it
 - (id)moduleGUID
 {
     return @"7c1b9991-2bbe-4f2d-b2d6-40daeea8bd33";
 }
 
-// This is generated for your module, please do not change it
 - (NSString *)moduleId
 {
     return @"com.ravindra.stripe";
 }
-
-#pragma mark Lifecycle
-
-- (void)startup
-{
-    // This method is called when the module is first loaded
-    // You *must* call the superclass
-    [super startup];
-    DebugLog(@"[DEBUG] %@ loaded", self);
-}
-
 
 #pragma Public APIs
 
@@ -63,8 +47,8 @@
     ENSURE_SINGLE_ARG(args,NSDictionary);
     
     NSString* cardNumber = nil;
-    int month;
-    int expiryYear;
+    int month = 1;
+    int expiryYear = 2022;
     NSString* cvc = nil;
     KrollCallback *paymentMethodCallback;
     
@@ -231,10 +215,7 @@
                 [self _fireEventToListener:@"handleNextActionForPaymentIntentCallback" withObject:event listener:handleNextActionForPaymentIntentCallback thisObject:nil];
                 break;
         }
-        
     }];
 }
-
-
 
 @end

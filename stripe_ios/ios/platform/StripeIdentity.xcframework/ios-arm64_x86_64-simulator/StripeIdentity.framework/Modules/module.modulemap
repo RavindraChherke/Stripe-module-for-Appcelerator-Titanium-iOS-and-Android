@@ -1,0 +1,11 @@
+framework module StripeIdentity {
+  umbrella header "StripeIdentity.h"
+
+  export *
+  module * { export * }
+}
+
+module StripeIdentity.Swift {
+    header "StripeIdentity-Swift.h"
+    requires objc
+}
