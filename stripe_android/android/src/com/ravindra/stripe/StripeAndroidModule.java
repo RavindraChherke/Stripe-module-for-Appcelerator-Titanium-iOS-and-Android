@@ -47,31 +47,10 @@ public class StripeAndroidModule extends KrollModule implements
 
 	@Kroll.onAppCreate
 	public static void onAppCreate(TiApplication app) {
-		Log.d(LCAT, "inside onAppCreate");
-		// put module init code that needs to run when the application is
-		// created
 	}
 
-	// Methods
-	@Kroll.method
-	public String example() {
-		Log.d(LCAT, "example called");
-		return "hello world";
-	}
 
-	// Properties
-	@Kroll.getProperty
-	public String getExampleProp() {
-		Log.d(LCAT, "get example property");
-		return "hello world";
-	}
 
-	@Kroll.setProperty
-	public void setExampleProp(String value) {
-		Log.d(LCAT, "set example property: " + value);
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Kroll.method
 	public boolean setCard(HashMap propsIn) {
 		KrollDict props = new KrollDict(propsIn);
@@ -107,22 +86,12 @@ public class StripeAndroidModule extends KrollModule implements
 			cvc = props.getString("cvc");
 		}
 
-		card = new Card(cardNumber, month, expiryYear, cvc);
+		card = new Card(cardNumber, (long) month, (long) expiryYear, cvc);
 		
 		return true;
 
 	}
 	
-	
-	/*@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Kroll.method
-	public String validateCard() {
-		
-	}*/
-	
-	
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Kroll.method
 	public void requestForToken(HashMap args) {
 		

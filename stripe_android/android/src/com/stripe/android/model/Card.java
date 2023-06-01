@@ -26,8 +26,8 @@ public class Card extends com.stripe.model.StripeObject {
 
     private String number;
     private String cvc;
-    private Integer expMonth;
-    private Integer expYear;
+    private Long expMonth;
+    private Long expYear;
     private String name;
     private String addressLine1;
     private String addressLine2;
@@ -43,8 +43,8 @@ public class Card extends com.stripe.model.StripeObject {
     public static class Builder {
         private final String number;
         private final String cvc;
-        private final Integer expMonth;
-        private final Integer expYear;
+        private final Long expMonth;
+        private final Long expYear;
         private String name;
         private String addressLine1;
         private String addressLine2;
@@ -57,7 +57,7 @@ public class Card extends com.stripe.model.StripeObject {
         private String fingerprint;
         private String country;
 
-        public Builder(String number, Integer expMonth, Integer expYear, String cvc) {
+        public Builder(String number, Long expMonth, Long expYear, String cvc) {
             this.number = number;
             this.expMonth = expMonth;
             this.expYear = expYear;
@@ -144,7 +144,7 @@ public class Card extends com.stripe.model.StripeObject {
         this.last4 = getLast4();
     }
 
-    public Card(String number, Integer expMonth, Integer expYear, String cvc, String name, String addressLine1, String addressLine2, String addressCity, String addressState, String addressZip, String addressCountry, String last4, String type, String fingerprint, String country) {
+    public Card(String number, Long expMonth, Long expYear, String cvc, String name, String addressLine1, String addressLine2, String addressCity, String addressState, String addressZip, String addressCountry, String last4, String type, String fingerprint, String country) {
         this.number = TextUtils.nullIfBlank(normalizeCardNumber(number));
         this.expMonth = expMonth;
         this.expYear = expYear;
@@ -164,11 +164,11 @@ public class Card extends com.stripe.model.StripeObject {
         this.last4 = getLast4();
     }
 
-    public Card(String number, Integer expMonth, Integer expYear, String cvc, String name, String addressLine1, String addressLine2, String addressCity, String addressState, String addressZip, String addressCountry) {
+    public Card(String number, Long expMonth, Long expYear, String cvc, String name, String addressLine1, String addressLine2, String addressCity, String addressState, String addressZip, String addressCountry) {
         this(number, expMonth, expYear, cvc, name, addressLine1, addressLine2, addressCity, addressState, addressZip, addressCountry, null, null, null, null);
     }
 
-    public Card(String number, Integer expMonth, Integer expYear, String cvc) {
+    public Card(String number, Long expMonth, Long expYear, String cvc) {
         this(number, expMonth, expYear, cvc, null, null, null, null, null, null, null, null, null, null, null);
     }
 
@@ -208,7 +208,7 @@ public class Card extends com.stripe.model.StripeObject {
     	if (!validateExpYear()) {
     		return false;
     	}
-    	return !DateUtils.hasMonthPassed(expYear, expMonth);
+    	return !DateUtils.hasMonthPassed(Math.toIntExact(expYear), Math.toIntExact(expMonth));
     }
 
     public boolean validateExpMonth() {
@@ -222,7 +222,7 @@ public class Card extends com.stripe.model.StripeObject {
     	if (expYear == null) {
     		return false;
     	}
-    	return !DateUtils.hasYearPassed(expYear);
+    	return !DateUtils.hasYearPassed(Math.toIntExact(expYear));
     }
 
     public boolean validateCVC() {
@@ -290,19 +290,19 @@ public class Card extends com.stripe.model.StripeObject {
         this.cvc = cvc;
     }
 
-    public Integer getExpMonth() {
+    public Long getExpMonth() {
         return expMonth;
     }
 
-    public void setExpMonth(Integer expMonth) {
+    public void setExpMonth(Long expMonth) {
         this.expMonth = expMonth;
     }
 
-    public Integer getExpYear() {
+    public Long getExpYear() {
         return expYear;
     }
 
-    public void setExpYear(Integer expYear) {
+    public void setExpYear(Long expYear) {
         this.expYear = expYear;
     }
 
